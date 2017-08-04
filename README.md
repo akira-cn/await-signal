@@ -70,7 +70,7 @@ async function update(c1, c2){
 
 [Demo 3](https://code.h5jun.com/cuv/edit?js,output)
 
-[SpriteAnimator](https://github.com/spritejs/sprite-animator) has a signal property that provides signals.
+[SpriteAnimator.generateAnimation](https://github.com/spritejs/sprite-animator) create a signaling object.
 
 ```js
 let animation, requestID
