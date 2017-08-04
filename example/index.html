@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Signals</title>
+  <style>
+    #button {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+    #button.stop {
+      background: red;
+    }
+    #button.pass {
+      background: green;
+    }
+
+    #block {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      background: blue;
+      left: 50px;
+      top: 150px;
+    }
+  </style>
+</head>
+<body>
+  <div id="button" class="stop"/>
+  <div id="block"/>
+  <script src = "/js/index.js"></script>
+  <script>
+    let traffic = new Signal('stop')
+
+    requestAnimationFrame(async function update(t){
+      //await traffic.while('stop')
+      await traffic.until('pass')
+      block.style.left = parseInt(block.style.left || 50) + 1 + 'px'
+      requestAnimationFrame(update)
+    })
+
+    button.onclick = e => {
+      traffic.state = button.className = button.className === 'stop' ? 'pass' : 'stop'
+    }
+  </script>
+</body>
+</html>

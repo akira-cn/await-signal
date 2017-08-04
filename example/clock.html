@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Signals</title>
+  <style>
+    .clock {
+      display: inline-block;
+      width: 50px;
+      height: 50px;
+      line-height: 50px;
+      text-align: center;
+      border-radius: 10px;
+      cursor: pointer;
+      background: black;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div class="clock" id="clock2">0</div>
+  <div class="clock" id="clock1">0</div>
+  <div class="clock" id="clock0">0</div>
+  <script src = "/js/index.js"></script>
+  <script>
+    class Counter extends Signal{
+      constructor(id){
+        super(0)
+        this.panel = document.getElementById(id)
+      }
+      inc(){
+        this.panel.innerHTML = (++this.state) % 10
+      }
+    }
+    const c0 = new Counter('clock0')
+    const c1 = new Counter('clock1')
+    const c2 = new Counter('clock2')
+
+    setInterval(async () => {
+      c0.inc()
+    }, 100)
+
+    async function update(c1, c2){
+      await c1.until(s => !(s % 10))
+      c2.inc()
+      await c1.while(s => !(s % 10))
+      update(c1, c2)
+    }
+
+    ;(async function(){
+      await c0.while(s => !(s % 10))
+      update(c0, c1)
+      await c1.while(s => !(s % 10))
+      update(c1, c2)
+    })();
+
+  </script>
+</body>
+</html>
