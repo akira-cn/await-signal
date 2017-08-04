@@ -13,7 +13,7 @@ npm install await-signal
 in browser
 
 ```html
-<script src="https://s4.ssl.qhres.com/!40b4d5dc/await-signals-0.1.0.js"></script>
+<script src="https://s1.ssl.qhres.com/!17e4956e/await-signals-0.1.1.js"></script>
 ```
 
 [Demo 1](https://code.h5jun.com/biv/edit?js,output)
@@ -66,6 +66,63 @@ async function update(c1, c2){
   await c1.while(s => !(s % 10))
   update(c1, c2)
 })();
+```
+
+[Demo 3](https://code.h5jun.com/decag/edit?js,output)
+
+[SpriteAnimator](https://github.com/spritejs/sprite-animator) has a signal property that provides signals.
+
+```js
+let animation, requestID
+
+start.onclick = function(){
+  if(requestID){
+    cancelAnimationFrame(requestID)
+  }
+
+  animation = SpriteAnimator.generateAnimation([{width:0},{width:150},{width:200}], 
+    {duration:2000, delay: 500})
+
+  animation.play()
+
+  block.style.backgroundColor = 'red'
+
+  animation.signal.until('running').then(() => {
+    block.style.backgroundColor = 'green'
+  })
+
+  animation.signal.until('finished').then(() => {
+    block.style.backgroundColor = 'blue'
+  })
+
+  requestID = requestAnimationFrame(async function update(){
+    await animation.signal.while('idle')
+
+    let res = animation.next(),
+        value = res.value
+
+    if(value){
+      block.style.width = value.width + 'px'
+    }
+
+    if(!res.done){
+      await animation.signal.while('paused')
+      requestAnimationFrame(update)
+    }
+  })
+}
+
+pause.onclick = function(){
+  if(animation){
+    animation.pause()
+  }
+}
+
+play.onclick = function(){
+  if(animation){
+    animation.play()
+  }
+}
 ```
 
 ## API
