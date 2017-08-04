@@ -23,7 +23,7 @@ test('signal while', async t => {
   }, 100)
 
   let result = await signal.while(true)
-  t.deepEqual(result, [true, true, true, true, true, true, false])
+  t.deepEqual(result, [true, false])
 })
 
 test('signal class', async t => {
