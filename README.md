@@ -97,7 +97,8 @@ start.onclick = function(){
 
   requestID = requestAnimationFrame(async function update(){
     await animation.while('idle')
-
+    await animation.while('pending')
+    
     let res = animation.next(),
         value = res.value
 
