@@ -33,7 +33,7 @@ button.onclick = e => {
 }
 ```
 
-[Demo 2](https://code.h5jun.com/kuxi/edit?html,js,output)
+[Demo 2](https://code.h5jun.com/dow/edit?html,js,output)
 
 ```js
 class Counter extends Signal{
