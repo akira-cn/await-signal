@@ -68,7 +68,7 @@ async function update(c1, c2){
 })();
 ```
 
-[Demo 3](https://code.h5jun.com/decag/edit?js,output)
+[Demo 3](https://code.h5jun.com/cuv/edit?js,output)
 
 [SpriteAnimator](https://github.com/spritejs/sprite-animator) has a signal property that provides signals.
 
@@ -87,16 +87,16 @@ start.onclick = function(){
 
   block.style.backgroundColor = 'red'
 
-  animation.signal.until('running').then(() => {
+  animation.until('running').then(() => {
     block.style.backgroundColor = 'green'
   })
 
-  animation.signal.until('finished').then(() => {
+  animation.until('finished').then(() => {
     block.style.backgroundColor = 'blue'
   })
 
   requestID = requestAnimationFrame(async function update(){
-    await animation.signal.while('idle')
+    await animation.while('idle')
 
     let res = animation.next(),
         value = res.value
@@ -106,7 +106,7 @@ start.onclick = function(){
     }
 
     if(!res.done){
-      await animation.signal.while('paused')
+      await animation.while('paused')
       requestAnimationFrame(update)
     }
   })
