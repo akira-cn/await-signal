@@ -1,4 +1,4 @@
-# Await-signal
+# await-signal
 
 Provide simple promised signals for any async tasks.
 
