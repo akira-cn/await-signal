@@ -1,7 +1,7 @@
 {
   "name": "await-signal",
-  "version": "0.1.1",
-  "description": "Provide promised signals for async tasks.",
+  "version": "0.1.2",
+  "description": "A simple promise-based signal system for running async tasks.",
   "main": "lib/index.js",
   "directories": {
     "example": "examfple"

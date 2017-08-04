@@ -1,6 +1,6 @@
 # await-signal
 
-Provide simple promised signals for any async tasks.
+A simple promise-based signal system for running async tasks. 
 
 ## Installation
 
